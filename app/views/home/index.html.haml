@@ -5,18 +5,22 @@
 %md-button{flex: "20", ng: {click: "get_video_streams()"}} get video streams
 
 %md-whiteframe.md-whiteframe-z1.video-streams{ng: {show: "title"}, layout: "column"}
-  %p
+  %md-toolbar
     {{title}}
     %input{type: "hidden", value: "{{title}}", ng: {model: "title"}}
     %md-button{"clip-copy" => "title"} copy to clipboard
 
-  %md-list.streams
-    %md-item{ng: {repeat: "stream in streams"}}
-      %md-item-content
-        .md-title-left
-          %img.codec{ng: {src: "/assets/{{stream.codec}}.png"}, alt: "{{stream.codec}}"}
-        .md-tile-content
-          %h3 {{stream.quality}} ({{stream.width}}x{{stream.height}})
-          %a.md-button{ng: {href: "{{stream.url}}"}} download
-      %md-divider{ng: {if: "!$last"}}
+  %md-content
+    %md-list.streams
+      %md-item{ng: {repeat: "stream in streams"}}
+        %md-item-content
+          .md-title-left{layout: "row"}
+            %img.icon{ng: {src: "/assets/{{stream.codec}}.png"}, alt: "{{stream.codec}}"}
+            %a.md-button{ng: {href: "{{stream.url}}"}} 
+              %img.icon{ng: {src: "/assets/download.png"}, alt: "download"}
+          .md-tile-content
+            %h3 {{stream.width}}x{{stream.height}} - {{stream.quality}}
+            
+              
+        %md-divider{ng: {if: "!$last"}}
 
